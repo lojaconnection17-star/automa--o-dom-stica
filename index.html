@@ -1,0 +1,2067 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0b1026">
+  <title>LarMax | Gestão Doméstica Completa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <style>
+    :root {
+      --bg: radial-gradient(1200px 800px at 10% -10%, rgba(56, 189, 248, 0.14), transparent),
+        radial-gradient(1000px 700px at 90% -20%, rgba(168, 85, 247, 0.12), transparent),
+        #0b1026;
+      --panel: linear-gradient(180deg, rgba(56, 189, 248, 0.08) 0%, transparent 70%), #10162b;
+      --card: linear-gradient(180deg, rgba(56, 189, 248, 0.1) 0%, transparent 65%), #151b33;
+      --surface: #151b33;
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5f5;
+      --text-tertiary: #94a3b8;
+      --border: rgba(148, 163, 184, 0.28);
+      --border-strong: rgba(56, 189, 248, 0.6);
+      --accent: #38bdf8;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --info: #a855f7;
+      --shadow: 0 60px 120px -80px rgba(56, 189, 248, 0.45);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      scrollbar-color: rgba(56, 189, 248, 0.4) transparent;
+      scrollbar-width: thin;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      line-height: 1.7;
+      min-height: 100dvh;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.8rem clamp(1rem, 4vw, 2.4rem);
+      backdrop-filter: blur(18px) saturate(120%);
+      background: linear-gradient(90deg, rgba(16, 22, 43, 0.98) 0%, rgba(11, 16, 38, 0.98) 100%);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      min-width: 0;
+    }
+
+    .brand-badge {
+      position: relative;
+      width: 2.6rem;
+      height: 2.6rem;
+      border-radius: 0.9rem;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.95), rgba(14, 165, 233, 0.7));
+      box-shadow: 0 40px 80px -50px rgba(56, 189, 248, 0.9);
+    }
+
+    .brand-badge::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(circle at top, rgba(248, 250, 252, 0.25), transparent);
+    }
+
+    .brand-badge i {
+      position: relative;
+      font-size: 1.4rem;
+      color: #0b1026;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .brand-text strong {
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .brand-text small {
+      color: var(--text-tertiary);
+      font-size: 0.9rem;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      padding: 0.55rem 1rem;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 0.98rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 160ms ease;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    .btn i {
+      font-size: 1.1rem;
+    }
+
+    .btn:hover {
+      color: var(--text-primary);
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-ghost {
+      border-color: transparent;
+    }
+
+    .btn-outline {
+      border-color: var(--border);
+      background: radial-gradient(circle at top, rgba(248, 250, 252, 0.01), transparent);
+    }
+
+    .btn-outline:hover {
+      border-color: rgba(56, 189, 248, 0.8);
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, rgba(56, 189, 248, 0.95) 0%, rgba(14, 165, 233, 0.9) 100%);
+      color: #0b1026;
+      font-weight: 600;
+      box-shadow: 0 40px 70px -60px rgba(56, 189, 248, 0.9);
+    }
+
+    .btn-primary i,
+    .btn-primary span {
+      color: inherit;
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.05);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+      gap: clamp(1rem, 3vw, 2rem);
+      padding: clamp(1rem, 3vw, 2rem) clamp(1rem, 4vw, 2.6rem) clamp(3rem, 6vw, 4rem);
+      max-width: 1680px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 5.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+    }
+
+    .sidebar-card {
+      position: relative;
+      border-radius: 1.2rem;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .sidebar-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(400px 200px at top, rgba(56, 189, 248, 0.16), transparent);
+      pointer-events: none;
+    }
+
+    .sidebar-header,
+    .nav {
+      position: relative;
+      z-index: 1;
+    }
+
+    .sidebar-header {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      padding: 1.6rem 1.8rem 0.8rem;
+    }
+
+    .sidebar-header small {
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-size: 0.78rem;
+      color: var(--text-tertiary);
+    }
+
+    .sidebar-header strong {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      padding: 0.4rem 1rem 1.4rem;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      border-radius: 0.9rem;
+      border: none;
+      background: transparent;
+      padding: 0.7rem 0.9rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      text-align: left;
+      transition: all 150ms ease;
+    }
+
+    .nav-item i {
+      font-size: 1.25rem;
+    }
+
+    .nav-item:hover:not(.active) {
+      background: rgba(148, 163, 184, 0.16);
+      color: var(--text-primary);
+    }
+
+    .nav-item.active {
+      background: radial-gradient(circle at left, rgba(56, 189, 248, 0.28), transparent 70%);
+      color: var(--text-primary);
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(1.4rem, 3vw, 2.2rem);
+      min-width: 0;
+    }
+
+    .page-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .page-header-text h1 {
+      font-size: clamp(1.9rem, 4vw, 3.2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .page-header-text p {
+      color: var(--text-tertiary);
+      margin-top: 0.4rem;
+    }
+
+    .page-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    [data-view] {
+      display: none;
+      flex-direction: column;
+      gap: clamp(1.4rem, 3vw, 2.2rem);
+    }
+
+    [data-view].active {
+      display: flex;
+    }
+
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: clamp(0.8rem, 2vw, 1rem);
+    }
+
+    .card {
+      grid-column: span 3;
+      position: relative;
+      border-radius: 1.2rem;
+      border: 1px solid var(--border);
+      background: var(--card);
+      padding: clamp(1.2rem, 2vw, 1.8rem);
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(280px 140px at top, rgba(56, 189, 248, 0.16), transparent);
+      pointer-events: none;
+    }
+
+    .card-header,
+    .card-value,
+    .card-subtle {
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-label {
+      color: var(--text-tertiary);
+    }
+
+    .card-value {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .card-subtle {
+      color: var(--text-tertiary);
+    }
+
+    .panel {
+      position: relative;
+      border-radius: 1.2rem;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(600px 280px at top, rgba(56, 189, 248, 0.12), transparent);
+      pointer-events: none;
+    }
+
+    .panel-header,
+    .panel-body,
+    .table-wrapper,
+    .list {
+      position: relative;
+      z-index: 1;
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      padding: clamp(1.2rem, 2vw, 1.8rem) clamp(1.2rem, 3vw, 2rem);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .panel-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .panel-title-group h2 {
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
+      font-weight: 600;
+    }
+
+    .panel-title-group p {
+      color: var(--text-tertiary);
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 980px;
+    }
+
+    thead th {
+      text-align: left;
+      font-weight: 500;
+      color: var(--text-tertiary);
+      padding: 0.8rem clamp(1.2rem, 3vw, 2rem);
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    tbody td {
+      padding: 0.95rem clamp(1.2rem, 3vw, 2rem);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+      vertical-align: top;
+    }
+
+    tbody tr:hover {
+      background: radial-gradient(circle at left, rgba(56, 189, 248, 0.08), transparent 70%);
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .cell-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .cell-subtle {
+      color: var(--text-tertiary);
+      font-size: 0.96rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      padding: 0.32rem 0.9rem;
+      color: var(--text-secondary);
+      font-size: 0.94rem;
+      white-space: nowrap;
+    }
+
+    .badge-success {
+      border-color: rgba(34, 197, 94, 0.7);
+      color: var(--success);
+    }
+
+    .badge-warning {
+      border-color: rgba(245, 158, 11, 0.7);
+      color: var(--warning);
+    }
+
+    .badge-danger {
+      border-color: rgba(239, 68, 68, 0.7);
+      color: var(--danger);
+    }
+
+    .badge-info {
+      border-color: rgba(168, 85, 247, 0.7);
+      color: var(--info);
+    }
+
+    .row-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.4rem;
+    }
+
+    .icon-btn {
+      width: 2.1rem;
+      height: 2.1rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      background: transparent;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      color: var(--text-tertiary);
+    }
+
+    .icon-btn:hover {
+      color: var(--text-primary);
+      background: rgba(148, 163, 184, 0.2);
+    }
+
+    .icon-btn.danger:hover {
+      color: var(--danger);
+    }
+
+    .icon-btn.success:hover {
+      color: var(--success);
+    }
+
+    .grid-split {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: clamp(0.8rem, 2vw, 1rem);
+    }
+
+    .split-panel {
+      grid-column: span 6;
+      position: relative;
+      border-radius: 1.2rem;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .split-panel.full {
+      grid-column: 1 / -1;
+    }
+
+    .split-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(520px 240px at top, rgba(56, 189, 248, 0.12), transparent);
+      pointer-events: none;
+    }
+
+    .split-panel .panel-header,
+    .split-panel .list,
+    .split-panel .table-wrapper {
+      position: relative;
+      z-index: 1;
+    }
+
+    .list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .list-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.95rem clamp(1.2rem, 3vw, 2rem);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+    }
+
+    .list-item:last-child {
+      border-bottom: none;
+    }
+
+    .list-group {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      min-width: 0;
+    }
+
+    .dot {
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 50%;
+      box-shadow: 0 0 0 6px rgba(56, 189, 248, 0.08);
+    }
+
+    .dot-info {
+      background: var(--accent);
+    }
+
+    .dot-success {
+      background: var(--success);
+    }
+
+    .dot-warning {
+      background: var(--warning);
+    }
+
+    .dot-danger {
+      background: var(--danger);
+    }
+
+    .dot-purple {
+      background: var(--info);
+    }
+
+    .progress {
+      width: 100%;
+      height: 0.6rem;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.24);
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, rgba(56, 189, 248, 0.95), rgba(34, 197, 94, 0.95));
+    }
+
+    .empty-state {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.9rem;
+      padding: clamp(2.6rem, 6vw, 4rem) 1.6rem;
+      color: var(--text-tertiary);
+    }
+
+    .empty-state h3 {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .empty-state p {
+      max-width: 320px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    dialog {
+      border: none;
+      background: transparent;
+      padding: 0;
+    }
+
+    dialog::backdrop {
+      background: radial-gradient(circle, rgba(11, 16, 38, 0.95), rgba(11, 16, 38, 0.98));
+      backdrop-filter: blur(4px);
+    }
+
+    .modal {
+      margin: auto;
+      width: min(920px, 94vw);
+      border-radius: 1.2rem;
+      border: 1px solid var(--border);
+      background: radial-gradient(800px 400px at top, rgba(56, 189, 248, 0.16), transparent), var(--panel);
+      box-shadow: 0 140px 200px -160px rgba(56, 189, 248, 0.5);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: clamp(1.2rem, 2vw, 1.8rem) clamp(1.2rem, 3vw, 2rem);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-body {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: clamp(0.8rem, 2vw, 1rem);
+      padding: clamp(1.4rem, 2vw, 2rem);
+    }
+
+    .field {
+      grid-column: span 6;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .field label {
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      border-radius: 0.9rem;
+      border: 1px solid var(--border);
+      background: radial-gradient(circle at top, rgba(248, 250, 252, 0.01), transparent);
+      padding: 0.8rem 1rem;
+      font-size: 1rem;
+      color: var(--text-primary);
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder {
+      color: rgba(148, 163, 184, 0.8);
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: rgba(56, 189, 248, 0.9);
+      box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.12);
+    }
+
+    .field textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .modal-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      padding: clamp(1rem, 2vw, 1.4rem) clamp(1.2rem, 3vw, 2rem);
+      border-top: 1px solid var(--border);
+    }
+
+    .mobile-nav {
+      display: none;
+    }
+
+    @media (max-width: 1280px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+        flex-direction: row;
+        flex-wrap: wrap;
+        overflow-x: auto;
+        gap: 1rem;
+        padding-bottom: 0.2rem;
+      }
+
+      .sidebar-card {
+        flex: 1 1 320px;
+        min-width: 320px;
+      }
+
+      .card {
+        grid-column: span 6;
+      }
+
+      .split-panel {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 1080px) {
+      .card {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 920px) {
+      .header-actions .btn span:not(.sr-only) {
+        display: none;
+      }
+
+      .header-actions .btn {
+        padding: 0.55rem 0.7rem;
+      }
+
+      .modal-body {
+        grid-template-columns: 1fr;
+      }
+
+      .field {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 760px) {
+      header {
+        padding: 0.7rem 1rem;
+      }
+
+      .brand-text small {
+        display: none;
+      }
+
+      .layout {
+        padding: 0.9rem 1rem calc(6rem + env(safe-area-inset-bottom, 0px));
+        gap: 1.2rem;
+      }
+
+      .sidebar {
+        display: none;
+      }
+
+      .mobile-nav {
+        position: fixed;
+        left: 50%;
+        bottom: calc(0.8rem + env(safe-area-inset-bottom, 0px));
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.5rem 0.7rem;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: radial-gradient(circle at top, rgba(56, 189, 248, 0.18), transparent), rgba(11, 16, 38, 0.98);
+        backdrop-filter: blur(18px) saturate(120%);
+        box-shadow: 0 60px 100px -70px rgba(56, 189, 248, 0.6);
+        z-index: 12;
+        overflow-x: auto;
+        max-width: calc(100vw - 1.2rem);
+      }
+
+      .mobile-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+        border: none;
+        background: transparent;
+        color: var(--text-tertiary);
+        padding: 0.4rem 0.7rem;
+        border-radius: 999px;
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+
+      .mobile-nav-item.active {
+        color: var(--text-primary);
+        background: radial-gradient(circle, rgba(56, 189, 248, 0.26), transparent);
+      }
+
+      .mobile-nav-item i {
+        font-size: 1.2rem;
+      }
+
+      table {
+        min-width: 880px;
+      }
+
+      .modal {
+        width: min(96vw, 680px);
+        height: min(94dvh, 880px);
+      }
+
+      .modal-body {
+        overflow-y: auto;
+      }
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="brand">
+      <div class="brand-badge">
+        <i class="ti ti-home-heart"></i>
+      </div>
+      <div class="brand-text">
+        <strong>LarMax</strong>
+        <small>Gestão Doméstica Completa</small>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-outline" data-action="export-json">
+        <i class="ti ti-download"></i>
+        <span>Backup</span>
+      </button>
+      <label class="btn btn-outline">
+        <i class="ti ti-upload"></i>
+        <span>Restaurar</span>
+        <input type="file" accept="application/json" class="hidden" data-action="import-json">
+      </label>
+      <button class="btn btn-primary" data-action="open-modal" data-target="generic">
+        <i class="ti ti-plus"></i>
+        <span>Novo item</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-header">
+          <small>Navegação</small>
+          <strong>Controle Total</strong>
+        </div>
+        <nav class="nav">
+          <button class="nav-item active" data-nav="overview"><i class="ti ti-layout-dashboard"></i><span>Visão Geral</span></button>
+          <button class="nav-item" data-nav="incomes"><i class="ti ti-trending-up"></i><span>Receitas</span></button>
+          <button class="nav-item" data-nav="expenses"><i class="ti ti-trending-down"></i><span>Despesas</span></button>
+          <button class="nav-item" data-nav="budget"><i class="ti ti-chart-pie"></i><span>Orçamento Mensal</span></button>
+          <button class="nav-item" data-nav="bills"><i class="ti ti-receipt"></i><span>Contas a Pagar/Receber</span></button>
+          <button class="nav-item" data-nav="shopping"><i class="ti ti-shopping-cart"></i><span>Lista de Compras</span></button>
+          <button class="nav-item" data-nav="tasks"><i class="ti ti-list-check"></i><span>Tarefas Domésticas</span></button>
+          <button class="nav-item" data-nav="stock"><i class="ti ti-box"></i><span>Estoque Doméstico</span></button>
+          <button class="nav-item" data-nav="maintenance"><i class="ti ti-tool"></i><span>Manutenções</span></button>
+          <button class="nav-item" data-nav="goals"><i class="ti ti-target"></i><span>Metas & Reservas</span></button>
+          <button class="nav-item" data-nav="settings"><i class="ti ti-settings"></i><span>Backup & Configurações</span></button>
+        </nav>
+      </div>
+    </aside>
+
+    <main>
+      <section data-view="overview" class="active">
+        <div class="page-header">
+          <div class="page-header-text">
+            <h1>Visão Geral</h1>
+            <p>Resumo financeiro, compras, tarefas e alertas da sua casa</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-outline" data-action="open-modal" data-target="income"><i class="ti ti-plus"></i>Receita</button>
+            <button class="btn btn-outline" data-action="open-modal" data-target="expense"><i class="ti ti-minus"></i>Despesa</button>
+            <button class="btn btn-primary" data-action="open-modal" data-target="bill"><i class="ti ti-file-plus"></i>Nova Conta</button>
+          </div>
+        </div>
+        <div class="grid-cards">
+          <article class="card">
+            <div class="card-header">
+              <span class="card-label">Saldo Atual</span>
+              <i class="ti ti-wallet"></i>
+            </div>
+            <div class="card-value" data-summary="balance">R$ 0,00</div>
+            <span class="card-subtle">Receitas pagas - Despesas pagas</span>
+          </article>
+          <article class="card">
+            <div class="card-header">
+              <span class="card-label">Receitas (Mês)</span>
+              <i class="ti ti-arrow-up-right"></i>
+            </div>
+            <div class="card-value" data-summary="incomes-month">R$ 0,00</div>
+            <span class="card-subtle">Entradas registradas neste mês</span>
+          </article>
+          <article class="card">
+            <div class="card-header">
+              <span class="card-label">Despesas (Mês)</span>
+              <i class="ti ti-arrow-down-right"></i>
+            </div>
+            <div class="card-value" data-summary="expenses-month">R$ 0,00</div>
+            <span class="card-subtle">Saídas registradas neste mês</span>
+          </article>
+          <article class="card">
+            <div class="card-header">
+              <span class="card-label">Contas Pendentes</span>
+              <i class="ti ti-clock"></i>
+            </div>
+            <div class="card-value" data-summary="bills-pending">R$ 0,00</div>
+            <span class="card-subtle">A vencer ou em aberto</span>
+          </article>
+        </div>
+        <div class="grid-split">
+          <div class="split-panel">
+            <div class="panel-header">
+              <div class="panel-title-group">
+                <h2>Próximas Contas</h2>
+                <p>Vencimentos mais próximos</p>
+              </div>
+              <button class="btn btn-ghost" data-nav-jump="bills">Ver todas</button>
+            </div>
+            <div class="list" data-list="overview-bills"></div>
+            <div class="empty-state hidden" data-empty="overview-bills">
+              <i class="ti ti-circle-check" style="font-size: 2.4rem;"></i>
+              <h3>Tudo em dia</h3>
+              <p>Não há contas pendentes no momento.</p>
+            </div>
+          </div>
+          <div class="split-panel">
+            <div class="panel-header">
+              <div class="panel-title-group">
+                <h2>Lista de Compras</h2>
+                <p>Itens ainda não comprados</p>
+              </div>
+              <button class="btn btn-ghost" data-nav-jump="shopping">Ver lista</button>
+            </div>
+            <div class="list" data-list="overview-shopping"></div>
+            <div class="empty-state hidden" data-empty="overview-shopping">
+              <i class="ti ti-basket" style="font-size: 2.4rem;"></i>
+              <h3>Lista limpa</h3>
+              <p>Adicione itens na aba Lista de Compras.</p>
+            </div>
+          </div>
+          <div class="split-panel full">
+            <div class="panel-header">
+              <div class="panel-title-group">
+                <h2>Tarefas Pendentes</h2>
+                <p>Rotinas e afazeres domésticos</p>
+              </div>
+              <button class="btn btn-ghost" data-nav-jump="tasks">Gerenciar</button>
+            </div>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Tarefa</th>
+                    <th>Ambiente</th>
+                    <th>Prioridade</th>
+                    <th>Responsável</th>
+                    <th>Prazo</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody data-tbody="overview-tasks"></tbody>
+              </table>
+            </div>
+            <div class="empty-state hidden" data-empty="overview-tasks">
+              <i class="ti ti-checkbox" style="font-size: 2.4rem;"></i>
+              <h3>Sem tarefas pendentes</h3>
+              <p>Você está em dia com todas as tarefas.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section data-view="incomes">
+        <div class="page-header">
+          <div class="page-header-text">
+            <h1>Receitas</h1>
+            <p>Salários, freelance, rendimentos e outras entradas</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-primary" data-action="open-modal" data-target="income"><i class="ti ti-plus"></i>Nova Receita</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title-group">
+              <h2>Histórico de Receitas</h2>
+              <p>Todos os registros com filtros visuais</p>
+            </div>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Descrição</th>
+                  <th>Categoria</th>
+                  <th>Valor</th>
+                  <th>Observação</th>
+                  <th style="text-align: right;">Ações</th>
+                </tr>
+              </thead>
+              <tbody data-tbody="incomes"></tbody>
+            </table>
+          </div>
+          <div class="empty-state hidden" data-empty="incomes">
+            <i class="ti ti-currency-dollar" style="font-size: 2.4rem;"></i>
+            <h3>Nenhuma receita cadastrada</h3>
+            <p>Clique em "Nova Receita" para adicionar seu primeiro registro.</p>
+          </div>
+        </div>
+      </section>
+
+      <section data-view="expenses">
+        <div class="page-header">
+          <div class="page-header-text">
+            <h1>Despesas</h1>
+            <p>Gastos fixos, variáveis e do cotidiano</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-primary" data-action="open-modal" data-target="expense"><i class="ti ti-plus"></i>Nova Despesa</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title-group">
+              <h2>Histórico de Despesas</h2>
+              <p>Controle por categoria, forma de pagamento e status</p>
+            </div>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Descrição</th>
+                  <th>Categoria</th>
+                  <th>Forma Pgto.</th>
+                  <th>Valor</th>
+                  <th>Status</th>
+                  <th style="text-align: right;">Ações</th>
+                </tr>
+              </thead>
+              <tbody data-tbody="expenses"></tbody>
+            </table>
+          </div>
+          <div class="empty-state hidden" data-empty="expenses">
+            <i class="ti ti-receipt-2" style="font-size: 2.4rem;"></i>
+            <h3>Nenhuma despesa cadastrada</h3>
+            <p>Registre seus gastos para manter o controle em dia.</p>
+          </div>
+        </div>
+      </section>
+
+      <section data-view="budget">
+        <div class="page-header">
+          <div class="page-header-text">
+            <h1>Orçamento Mensal</h1>
+            <p>Limites por categoria com acompanhamento em tempo real</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-primary" data-action="open-modal" data-target="budget"><i class="ti ti-plus"></i>Definir Limite</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title-group">
+              <h2>Orçado x Gasto</h2>
+              <p>Baseado nas despesas pagas do mês atual</p>
+            </div>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Categoria</th>
+                  <th>Orçado</th>
+                  <th>Gasto</th>
+                  <th>Restante</th>
+                  <th>Uso</th>
+                  <th style="text-align: right;">Ações</th>
+                </tr>
+              </thead>
+              <tbody data-tbody="budget"></tbody>
+            </table>
+          </div>
+          <div class="empty-state hidden" data-empty="budget">
+            <i class="ti ti-chart-donut-2" style="font-size: 2.4rem;"></i>
+            <h3>Nenhum orçamento definido</h3>
+            <p>Crie limites por categoria para planejar melhor.</p>
+          </div>
+        </div>
+      </section>
+
+      <section data-view="bills">
+        <div class="page-header">
+          <div class="page-header-text">
+            <h1>Contas a Pagar / Receber</h1>
+            <p>Agenda financeira com vencimentos e status</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-primary" data-action="open-modal" data-target="bill"><i class="ti ti-plus"></i>Nova Conta</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title-group">
+              <h2>Agenda Financeira</h2>
+              <p>Organize por data de vencimento</p>
+            </div>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Vencimento</th>
+                  <th>Descrição</th>
+                  <th>Tipo</th>
+                  <th>Categoria</th>
+                  <th>Valor</th>
+                  <th>Status</th>
+                  <th style="text-align: right;">Ações</th>
+                </tr>
+              </thead>
+              <tbody data-tbody="bills"></tbody>
+            </table>
+          </div>
+          <div class="empty-state hidden" data-empty="bills">
+            <i class="ti ti-calendar-event" style="font-size: 2.4rem;"></i>
+            <h3>Nenhuma conta cadastrada</h3>
+            <p>Adicione contas a pagar ou a receber para não esquecer.</p>
+          </div>
+        </div>
+      </section>
+
+      <section data-view="shopping">
+        <div class="page-header">
+          <div class="page-header-text">
+            <h1>Lista de Compras</h1>
+            <p>Supermercado, feira, farmácia e demais compras</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-primary" data-action="open-modal" data-target="shopping"><i class="ti ti-plus"></i>Adicionar Item</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title-group">
+              <h2>Itens da Lista</h2>
+              <p>Marque como comprado ao finalizar a compra</p>
+            </div>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Feito</th>
+                  <th>Item</th>
+                  <th>Setor</th>
+                  <th>Qtd.</th>
+                  <th>Un.</th>
+                  <th>V. Unit.</th>
+                  <th>Total</th>
+                  <th style="text-align: right;">Ações</th>
+                </tr>
+              </thead>
+              <tbody data-tbody="shopping"></tbody>
+            </table>
+          </div>
+          <div class="empty-state hidden" data-empty="shopping">
+            <i class="ti ti-basket-off" style="font-size: 2.4rem;"></i>
+            <h3>Lista vazia</h3>
+            <p>Comece adicionando itens à sua lista.</p>
+          </div>
+        </div>
+      </section>
+
+      <section data-view="tasks">
+        <div class="page-header">
+          <div class="page-header-text">
+            <h1>Tarefas Domésticas</h1>
+            <p>Rotinas, limpeza, organização e cuidados</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-primary" data-action="open-modal" data-target="task"><i class="ti ti-plus"></i>Nova Tarefa</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title-group">
+              <h2>Quadro de Tarefas</h2>
+              <p>Prioridade, responsável, prazo e status</p>
+            </div>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Tarefa</th>
+                  <th>Ambiente</th>
+                  <th>Prioridade</th>
+                  <th>Responsável</th>
+                  <th>Prazo</th>
+                  <th>Status</th>
+                  <th style="text-align: right;">Ações</th>
+                </tr>
+              </thead>
+              <tbody data-tbody="tasks"></tbody>
+            </table>
+          </div>
+          <div class="empty-state hidden" data-empty="tasks">
+            <i class="ti ti-clipboard-check" style="font-size: 2.4rem;"></i>
+            <h3>Nenhuma tarefa cadastrada</h3>
+            <p>Crie suas rotinas para manter tudo organizado.</p>
+          </div>
+        </div>
+      </section>
+
+      <section data-view="stock">
+        <div class="page-header">
+          <div class="page-header-text">
+            <h1>Estoque Doméstico</h1>
+            <p>Alimentos, limpeza, higiene e insumos</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-primary" data-action="open-modal" data-target="stock"><i class="ti ti-plus"></i>Novo Item</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title-group">
+              <h2>Controle de Estoque</h2>
+              <p>Alertas para estoque baixo e produtos vencendo</p>
+            </div>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Categoria</th>
+                  <th>Qtd.</th>
+                  <th>Un.</th>
+                  <th>Mínimo</th>
+                  <th>Local</th>
+                  <th>Validade</th>
+                  <th>Situação</th>
+                  <th style="text-align: right;">Ações</th>
+                </tr>
+              </thead>
+              <tbody data-tbody="stock"></tbody>
+            </table>
+          </div>
+          <div class="empty-state hidden" data-empty="stock">
+            <i class="ti ti-fridge" style="font-size: 2.4rem;"></i>
+            <h3>Estoque vazio</h3>
+            <p>Cadastre produtos para controlar quantidades e validade.</p>
+          </div>
+        </div>
+      </section>
+
+      <section data-view="maintenance">
+        <div class="page-header">
+          <div class="page-header-text">
+            <h1>Manutenções</h1>
+            <p>Equipamentos, eletrodomésticos, reparos e preventivas</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-primary" data-action="open-modal" data-target="maintenance"><i class="ti ti-plus"></i>Registrar Manutenção</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title-group">
+              <h2>Histórico & Agendamentos</h2>
+              <p>Preventivas e corretivas com custos</p>
+            </div>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Equipamento / Local</th>
+                  <th>Tipo</th>
+                  <th>Serviço</th>
+                  <th>Empresa/Técnico</th>
+                  <th>Custo</th>
+                  <th>Próxima</th>
+                  <th style="text-align: right;">Ações</th>
+                </tr>
+              </thead>
+              <tbody data-tbody="maintenance"></tbody>
+            </table>
+          </div>
+          <div class="empty-state hidden" data-empty="maintenance">
+            <i class="ti ti-wrench" style="font-size: 2.4rem;"></i>
+            <h3>Nenhuma manutenção registrada</h3>
+            <p>Mantenha o histórico organizado para referência futura.</p>
+          </div>
+        </div>
+      </section>
+
+      <section data-view="goals">
+        <div class="page-header">
+          <div class="page-header-text">
+            <h1>Metas & Reservas</h1>
+            <p>Reserva de emergência, viagem, reforma e objetivos</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-primary" data-action="open-modal" data-target="goal"><i class="ti ti-plus"></i>Nova Meta</button>
+          </div>
+        </div>
+        <div class="grid-split">
+          <div class="split-panel full">
+            <div class="panel-header">
+              <div class="panel-title-group">
+                <h2>Acompanhamento</h2>
+                <p>Adicione ou retire valores para ver a evolução</p>
+              </div>
+            </div>
+            <div class="list" data-list="goals"></div>
+            <div class="empty-state hidden" data-empty="goals">
+              <i class="ti ti-trophy" style="font-size: 2.4rem;"></i>
+              <h3>Nenhuma meta cadastrada</h3>
+              <p>Defina seu objetivo e comece a guardar hoje.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section data-view="settings">
+        <div class="page-header">
+          <div class="page-header-text">
+            <h1>Backup & Configurações</h1>
+            <p>Salvamento, restauração e informações do app</p>
+          </div>
+        </div>
+        <div class="grid-split">
+          <div class="split-panel">
+            <div class="panel-header">
+              <div class="panel-title-group">
+                <h2>Backup Completo</h2>
+                <p>Exporte ou restaure todos os dados</p>
+              </div>
+            </div>
+            <div class="panel-body" style="position: relative; z-index: 1; display: flex; flex-direction: column; gap: 1rem; padding: clamp(1.4rem, 2vw, 2rem);">
+              <p style="color: var(--text-secondary);">Gere um arquivo JSON com todas as receitas, despesas, contas, compras, tarefas, estoque, manutenções, orçamento e metas.</p>
+              <div style="display: flex; flex-wrap: wrap; gap: 0.6rem;">
+                <button class="btn btn-primary" data-action="export-json"><i class="ti ti-download"></i>Baixar backup (.JSON)</button>
+                <label class="btn btn-outline">
+                  <i class="ti ti-upload"></i>
+                  Restaurar backup
+                  <input type="file" accept="application/json" class="hidden" data-action="import-json">
+                </label>
+              </div>
+              <span class="cell-subtle">Dica: salve esse arquivo em um local seguro. Restaurar substitui todos os dados atuais.</span>
+            </div>
+          </div>
+          <div class="split-panel">
+            <div class="panel-header">
+              <div class="panel-title-group">
+                <h2>Sobre o LarMax</h2>
+                <p>App portátil, offline e sem dependências</p>
+              </div>
+            </div>
+            <div class="panel-body" style="position: relative; z-index: 1; display: flex; flex-direction: column; gap: 0.9rem; padding: clamp(1.4rem, 2vw, 2rem);">
+              <div class="list-item" style="padding: 0; border: none;">
+                <div class="list-group">
+                  <div class="dot dot-success"></div>
+                  <div class="cell-group">
+                    <span>100% Offline</span>
+                    <span class="cell-subtle">Funciona sem internet</span>
+                  </div>
+                </div>
+              </div>
+              <div class="list-item" style="padding: 0; border: none;">
+                <div class="list-group">
+                  <div class="dot dot-info"></div>
+                  <div class="cell-group">
+                    <span>Responsivo</span>
+                    <span class="cell-subtle">Perfeito no PC, tablet e celular</span>
+                  </div>
+                </div>
+              </div>
+              <div class="list-item" style="padding: 0; border: none;">
+                <div class="list-group">
+                  <div class="dot dot-purple"></div>
+                  <div class="cell-group">
+                    <span>CRUD Completo</span>
+                    <span class="cell-subtle">Incluir, editar e excluir em todos os módulos</span>
+                  </div>
+                </div>
+              </div>
+              <div class="list-item" style="padding: 0; border: none;">
+                <div class="list-group">
+                  <div class="dot dot-warning"></div>
+                  <div class="cell-group">
+                    <span>Portátil</span>
+                    <span class="cell-subtle">Basta copiar a pasta para usar em qualquer lugar</span>
+                  </div>
+                </div>
+              </div>
+              <div class="list-item" style="padding: 0; border: none;">
+                <div class="list-group">
+                  <div class="dot dot-danger"></div>
+                  <div class="cell-group">
+                    <span>Dados Locais</span>
+                    <span class="cell-subtle">Salvos apenas neste navegador (localStorage)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <nav class="mobile-nav">
+    <button class="mobile-nav-item active" data-mobile-nav="overview"><i class="ti ti-layout-dashboard"></i><span>Visão</span></button>
+    <button class="mobile-nav-item" data-mobile-nav="incomes"><i class="ti ti-trending-up"></i><span>Receitas</span></button>
+    <button class="mobile-nav-item" data-mobile-nav="expenses"><i class="ti ti-trending-down"></i><span>Despesas</span></button>
+    <button class="mobile-nav-item" data-mobile-nav="bills"><i class="ti ti-receipt"></i><span>Contas</span></button>
+    <button class="mobile-nav-item" data-mobile-nav="shopping"><i class="ti ti-shopping-cart"></i><span>Compras</span></button>
+    <button class="mobile-nav-item" data-mobile-nav="tasks"><i class="ti ti-list-check"></i><span>Tarefas</span></button>
+    <button class="mobile-nav-item" data-mobile-nav="more"><i class="ti ti-dots"></i><span>Mais</span></button>
+  </nav>
+
+  <dialog id="modal">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="panel-title-group">
+          <h2 data-modal-title>Novo item</h2>
+          <p data-modal-subtitle>Preencha os dados abaixo</p>
+        </div>
+        <button class="icon-btn" data-action="close-modal"><i class="ti ti-x"></i></button>
+      </div>
+      <form id="modal-form">
+        <div class="modal-body" data-modal-body></div>
+        <div class="modal-footer">
+          <button class="btn btn-ghost" type="button" data-action="close-modal">Cancelar</button>
+          <button class="btn btn-primary" type="submit"><i class="ti ti-check"></i>Salvar</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <template id="tpl-income">
+    <input type="hidden" name="id">
+    <input type="hidden" name="type" value="income">
+    <div class="field"><label>Data</label><input type="date" name="date" required></div>
+    <div class="field"><label>Valor (R$)</label><input type="number" step="0.01" min="0" inputmode="decimal" name="amount" placeholder="0,00" required></div>
+    <div class="field full"><label>Descrição</label><input type="text" name="description" placeholder="Ex.: Salário, Freelance, Aluguel recebido" required></div>
+    <div class="field"><label>Categoria</label><input type="text" name="category" placeholder="Ex.: Salário, Renda Extra"></div>
+    <div class="field"><label>Observação</label><input type="text" name="note" placeholder="Opcional"></div>
+  </template>
+
+  <template id="tpl-expense">
+    <input type="hidden" name="id">
+    <input type="hidden" name="type" value="expense">
+    <div class="field"><label>Data</label><input type="date" name="date" required></div>
+    <div class="field"><label>Valor (R$)</label><input type="number" step="0.01" min="0" inputmode="decimal" name="amount" placeholder="0,00" required></div>
+    <div class="field full"><label>Descrição</label><input type="text" name="description" placeholder="Ex.: Supermercado, Combustível" required></div>
+    <div class="field"><label>Categoria</label><input type="text" name="category" placeholder="Ex.: Alimentação, Transporte, Saúde"></div>
+    <div class="field"><label>Forma de Pagamento</label><input type="text" name="payment" placeholder="Ex.: Dinheiro, Pix, Cartão, Débito"></div>
+    <div class="field"><label>Status</label><select name="status"><option value="pago">Pago</option><option value="pendente">Pendente</option></select></div>
+    <div class="field full"><label>Observação</label><input type="text" name="note" placeholder="Opcional"></div>
+  </template>
+
+  <template id="tpl-budget">
+    <input type="hidden" name="id">
+    <input type="hidden" name="type" value="budget">
+    <div class="field full"><label>Categoria</label><input type="text" name="category" placeholder="Ex.: Alimentação, Transporte, Lazer" required></div>
+    <div class="field"><label>Limite Mensal (R$)</label><input type="number" step="0.01" min="0" inputmode="decimal" name="limit" placeholder="0,00" required></div>
+    <div class="field"><label>Mês/Ano Referência</label><input type="month" name="period" required></div>
+  </template>
+
+  <template id="tpl-bill">
+    <input type="hidden" name="id">
+    <input type="hidden" name="type" value="bill">
+    <div class="field"><label>Vencimento</label><input type="date" name="dueDate" required></div>
+    <div class="field"><label>Valor (R$)</label><input type="number" step="0.01" min="0" inputmode="decimal" name="amount" placeholder="0,00" required></div>
+    <div class="field full"><label>Descrição</label><input type="text" name="description" placeholder="Ex.: Luz, Internet, Aluguel, Condomínio" required></div>
+    <div class="field"><label>Tipo</label><select name="kind"><option value="pagar">A Pagar</option><option value="receber">A Receber</option></select></div>
+    <div class="field"><label>Categoria</label><input type="text" name="category" placeholder="Ex.: Moradia, Serviços"></div>
+    <div class="field"><label>Status</label><select name="status"><option value="pendente">Pendente</option><option value="pago">Pago / Recebido</option><option value="atrasado">Atrasado</option></select></div>
+    <div class="field full"><label>Observação</label><input type="text" name="note" placeholder="Opcional"></div>
+  </template>
+
+  <template id="tpl-shopping">
+    <input type="hidden" name="id">
+    <input type="hidden" name="type" value="shopping">
+    <input type="hidden" name="bought" value="false">
+    <div class="field full"><label>Item</label><input type="text" name="item" placeholder="Ex.: Arroz, Sabão em pó, Leite" required></div>
+    <div class="field"><label>Setor / Corredor</label><input type="text" name="aisle" placeholder="Ex.: Mercearia, Limpeza, Padaria"></div>
+    <div class="field"><label>Quantidade</label><input type="number" step="0.01" min="0" inputmode="decimal" name="qty" placeholder="1"></div>
+    <div class="field"><label>Unidade</label><input type="text" name="unit" placeholder="Ex.: un, kg, L, cx"></div>
+    <div class="field"><label>Valor Unitário (R$)</label><input type="number" step="0.01" min="0" inputmode="decimal" name="unitPrice" placeholder="0,00"></div>
+    <div class="field full"><label>Observação</label><input type="text" name="note" placeholder="Opcional"></div>
+  </template>
+
+  <template id="tpl-task">
+    <input type="hidden" name="id">
+    <input type="hidden" name="type" value="task">
+    <div class="field full"><label>Tarefa</label><input type="text" name="title" placeholder="Ex.: Lavar louça, Aspirar, Passar pano" required></div>
+    <div class="field"><label>Ambiente</label><input type="text" name="room" placeholder="Ex.: Cozinha, Banheiro, Sala"></div>
+    <div class="field"><label>Prioridade</label><select name="priority"><option value="baixa">Baixa</option><option value="media" selected>Média</option><option value="alta">Alta</option></select></div>
+    <div class="field"><label>Responsável</label><input type="text" name="assignee" placeholder="Ex.: Todos, Mãe, Pai"></div>
+    <div class="field"><label>Prazo</label><input type="date" name="dueDate"></div>
+    <div class="field"><label>Status</label><select name="status"><option value="pendente" selected>Pendente</option><option value="fazendo">Fazendo</option><option value="concluida">Concluída</option></select></div>
+    <div class="field full"><label>Detalhes / Instruções</label><textarea name="details" placeholder="Descreva como deve ser feita (opcional)"></textarea></div>
+  </template>
+
+  <template id="tpl-stock">
+    <input type="hidden" name="id">
+    <input type="hidden" name="type" value="stock">
+    <div class="field full"><label>Item</label><input type="text" name="item" placeholder="Ex.: Detergente, Feijão, Papel higiênico" required></div>
+    <div class="field"><label>Categoria</label><input type="text" name="category" placeholder="Ex.: Alimentos, Limpeza, Higiene"></div>
+    <div class="field"><label>Quantidade Atual</label><input type="number" step="0.01" min="0" inputmode="decimal" name="qty" placeholder="0"></div>
+    <div class="field"><label>Unidade</label><input type="text" name="unit" placeholder="Ex.: un, kg, L, pct"></div>
+    <div class="field"><label>Estoque Mínimo</label><input type="number" step="0.01" min="0" inputmode="decimal" name="minQty" placeholder="0"></div>
+    <div class="field"><label>Local de Armazenagem</label><input type="text" name="location" placeholder="Ex.: Despensa, Geladeira, Armário"></div>
+    <div class="field"><label>Data de Validade</label><input type="date" name="expiry"></div>
+    <div class="field full"><label>Observação</label><input type="text" name="note" placeholder="Opcional"></div>
+  </template>
+
+  <template id="tpl-maintenance">
+    <input type="hidden" name="id">
+    <input type="hidden" name="type" value="maintenance">
+    <div class="field"><label>Data da Manutenção</label><input type="date" name="date" required></div>
+    <div class="field"><label>Próxima Manutenção</label><input type="date" name="nextDate"></div>
+    <div class="field full"><label>Equipamento / Local</label><input type="text" name="equipment" placeholder="Ex.: Geladeira, Ar-condicionado, Torneira" required></div>
+    <div class="field"><label>Tipo</label><select name="kind"><option value="preventiva">Preventiva</option><option value="corretiva">Corretiva</option></select></div>
+    <div class="field"><label>Custo (R$)</label><input type="number" step="0.01" min="0" inputmode="decimal" name="cost" placeholder="0,00"></div>
+    <div class="field full"><label>Serviço Realizado</label><input type="text" name="service" placeholder="Ex.: Troca de filtro, Vedação, Limpeza" required></div>
+    <div class="field full"><label>Responsável / Empresa / Técnico</label><input type="text" name="provider" placeholder="Ex.: Nome da empresa ou técnico"></div>
+    <div class="field full"><label>Observação</label><textarea name="note" placeholder="Peças trocadas, garantia, detalhes..."></textarea></div>
+  </template>
+
+  <template id="tpl-goal">
+    <input type="hidden" name="id">
+    <input type="hidden" name="type" value="goal">
+    <div class="field full"><label>Nome da Meta</label><input type="text" name="title" placeholder="Ex.: Viagem, Reserva de Emergência, Reforma" required></div>
+    <div class="field"><label>Valor Alvo (R$)</label><input type="number" step="0.01" min="0" inputmode="decimal" name="target" placeholder="0,00" required></div>
+    <div class="field"><label>Valor Já Guardado (R$)</label><input type="number" step="0.01" min="0" inputmode="decimal" name="saved" placeholder="0,00"></div>
+    <div class="field"><label>Prazo para Alcançar</label><input type="date" name="deadline"></div>
+    <div class="field full"><label>Motivo / Observação</label><input type="text" name="note" placeholder="Opcional"></div>
+  </template>
+
+  <script>
+    const STORAGE_KEY = "larmax-v2";
+    const store = loadStore();
+
+    const navItems = document.querySelectorAll("[data-nav]");
+    const mobileNavItems = document.querySelectorAll("[data-mobile-nav]");
+    const views = document.querySelectorAll("[data-view]");
+    const modal = document.getElementById("modal");
+    const modalForm = document.getElementById("modal-form");
+    const modalBody = document.querySelector("[data-modal-body]");
+    const modalTitle = document.querySelector("[data-modal-title]");
+    const modalSubtitle = document.querySelector("[data-modal-subtitle]");
+    let currentEdit = null;
+
+    navItems.forEach((btn) => btn.addEventListener("click", () => switchView(btn.dataset.nav)));
+    mobileNavItems.forEach((btn) => btn.addEventListener("click", () => handleMobileNav(btn.dataset.mobileNav)));
+    document.querySelectorAll("[data-nav-jump]").forEach((btn) => btn.addEventListener("click", () => switchView(btn.dataset.navJump)));
+    document.querySelectorAll("[data-action='open-modal']").forEach((btn) => btn.addEventListener("click", () => openModal(btn.dataset.target)));
+    document.querySelectorAll("[data-action='close-modal']").forEach((btn) => btn.addEventListener("click", closeModal));
+    document.querySelectorAll("[data-action='export-json']").forEach((btn) => btn.addEventListener("click", exportJson));
+    document.querySelectorAll("[data-action='import-json']").forEach((input) => input.addEventListener("change", importJson));
+    modalForm.addEventListener("submit", saveFromModal);
+    modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+
+    function loadStore() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) return JSON.parse(raw);
+      } catch (err) { console.warn(err); }
+      return { incomes: [], expenses: [], budget: [], bills: [], shopping: [], tasks: [], stock: [], maintenance: [], goals: [] };
+    }
+
+    function saveStore() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
+      renderAll();
+    }
+
+    function switchView(name) {
+      navItems.forEach((btn) => btn.classList.toggle("active", btn.dataset.nav === name));
+      mobileNavItems.forEach((btn) => btn.classList.toggle("active", btn.dataset.mobileNav === name));
+      views.forEach((view) => view.classList.toggle("active", view.dataset.view === name));
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function handleMobileNav(name) {
+      if (name === "more") {
+        switchView("settings");
+        return;
+      }
+      switchView(name);
+    }
+
+    function openModal(target, editData = null) {
+      if (target === "generic") {
+        const pick = prompt("Qual módulo deseja adicionar?\n\n1) Receita\n2) Despesa\n3) Conta a Pagar/Receber\n4) Item da Lista de Compras\n5) Tarefa\n6) Item do Estoque\n7) Manutenção\n8) Meta");
+        if (!pick) return;
+        const map = { "1": "income", "2": "expense", "3": "bill", "4": "shopping", "5": "task", "6": "stock", "7": "maintenance", "8": "goal" };
+        target = map[pick.trim()] || "income";
+      }
+      currentEdit = editData;
+      modalBody.innerHTML = "";
+      const tpl = document.getElementById(`tpl-${target}`);
+      if (!tpl) return;
+      modalBody.appendChild(tpl.content.cloneNode(true));
+      if (editData) {
+        modalTitle.textContent = "Editar item";
+        modalSubtitle.textContent = "Atualize os dados e salve as alterações";
+        Object.entries(editData).forEach(([key, value]) => {
+          const field = modalForm.querySelector(`[name='${key}']`);
+          if (!field) return;
+          if (field.type === "checkbox") field.checked = !!value;
+          else if (value !== undefined && value !== null) field.value = value;
+        });
+      } else {
+        modalTitle.textContent = "Novo item";
+        modalSubtitle.textContent = "Preencha os dados abaixo";
+        const date = modalForm.querySelector("[name='date']");
+        if (date && !date.value) date.valueAsDate = new Date();
+        const due = modalForm.querySelector("[name='dueDate']");
+        if (due && !due.value) due.valueAsDate = new Date();
+      }
+      modal.showModal();
+    }
+
+    function closeModal() {
+      modal.close();
+      modalForm.reset();
+      currentEdit = null;
+    }
+
+    function saveFromModal(e) {
+      e.preventDefault();
+      const formData = new FormData(modalForm);
+      const data = {};
+      formData.forEach((value, key) => { data[key] = value; });
+      if (!data.type) return;
+      const numFields = ["amount", "limit", "qty", "minQty", "unitPrice", "target", "saved", "cost"];
+      numFields.forEach((f) => { if (data[f] !== undefined && data[f] !== "") data[f] = Number(data[f]); else if (data[f] === "") delete data[f]; });
+      if (data.bought === "true") data.bought = true;
+      else if (data.bought === "false") data.bought = false;
+      if (currentEdit && currentEdit.id) {
+        data.id = currentEdit.id;
+        const key = getKey(data.type);
+        const list = store[key];
+        if (list) {
+          const idx = list.findIndex((item) => item.id === currentEdit.id);
+          if (idx >= 0) list[idx] = { ...list[idx], ...data };
+        }
+      } else {
+        data.id = Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+        const key = getKey(data.type);
+        store[key].push(data);
+      }
+      saveStore();
+      closeModal();
+    }
+
+    function getKey(type) {
+      if (type === "bill") return "bills";
+      if (type === "shopping") return "shopping";
+      if (type === "task") return "tasks";
+      if (type === "stock") return "stock";
+      if (type === "maintenance") return "maintenance";
+      if (type === "goal") return "goals";
+      if (type === "budget") return "budget";
+      if (type === "income") return "incomes";
+      return "expenses";
+    }
+
+    function removeItem(type, id) {
+      if (!confirm("Tem certeza que deseja excluir este item?\nEsta ação não pode ser desfeita.")) return;
+      const key = getKey(type);
+      store[key] = store[key].filter((item) => item.id !== id);
+      saveStore();
+    }
+
+    function toggleShopping(id) {
+      const item = store.shopping.find((i) => i.id === id);
+      if (!item) return;
+      item.bought = !item.bought;
+      saveStore();
+    }
+
+    function updateGoalSaved(id, delta) {
+      const goal = store.goals.find((g) => g.id === id);
+      if (!goal) return;
+      goal.saved = Number(goal.saved || 0) + Number(delta);
+      if (goal.saved < 0) goal.saved = 0;
+      saveStore();
+    }
+
+    function formatBRL(v) {
+      return (Number(v) || 0).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+    }
+
+    function formatDate(d) {
+      if (!d) return "-";
+      try {
+        const date = new Date(d + "T00:00:00");
+        return date.toLocaleDateString("pt-BR");
+      } catch {
+        return d;
+      }
+    }
+
+    function isSameMonth(d) {
+      if (!d) return false;
+      try {
+        const date = new Date(d + "T00:00:00");
+        const now = new Date();
+        return date.getMonth() === now.getMonth() && date.getFullYear() === now.getFullYear();
+      } catch {
+        return false;
+      }
+    }
+
+    function renderAll() {
+      renderOverview();
+      renderTable("incomes", store.incomes, renderIncomeRow);
+      renderTable("expenses", store.expenses, renderExpenseRow);
+      renderTable("budget", store.budget, renderBudgetRow);
+      renderTable("bills", store.bills, renderBillRow);
+      renderTable("shopping", store.shopping, renderShoppingRow);
+      renderTable("tasks", store.tasks, renderTaskRow);
+      renderTable("stock", store.stock, renderStockRow);
+      renderTable("maintenance", store.maintenance, renderMaintenanceRow);
+      renderGoals();
+    }
+
+    function renderTable(key, list, renderer) {
+      const tbody = document.querySelector(`[data-tbody='${key}']`);
+      const empty = document.querySelector(`[data-empty='${key}']`);
+      if (!tbody) return;
+      tbody.innerHTML = "";
+      if (!Array.isArray(list) || list.length === 0) {
+        if (empty) empty.classList.remove("hidden");
+        return;
+      }
+      if (empty) empty.classList.add("hidden");
+      [...list].sort((a, b) => String(b.id).localeCompare(String(a.id))).forEach((item) => tbody.appendChild(renderer(item)));
+    }
+
+    function renderIncomeRow(item) {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td><div class="cell-group"><span>${formatDate(item.date)}</span></div></td><td><div class="cell-group"><span>${escapeHtml(item.description)}</span></div></td><td><span class="badge">${escapeHtml(item.category || "-")}</span></td><td><strong style="color: var(--success);">${formatBRL(item.amount)}</strong></td><td><span class="cell-subtle">${escapeHtml(item.note || "-")}</span></td><td><div class="row-actions"><button class="icon-btn" data-edit="income" data-id="${item.id}"><i class="ti ti-pencil"></i></button><button class="icon-btn danger" data-remove="income" data-id="${item.id}"><i class="ti ti-trash"></i></button></div></td>`;
+      tr.querySelector("[data-edit]").addEventListener("click", () => openModal("income", item));
+      tr.querySelector("[data-remove]").addEventListener("click", () => removeItem("income", item.id));
+      return tr;
+    }
+
+    function renderExpenseRow(item) {
+      const tr = document.createElement("tr");
+      const statusBadge = item.status === "pago" ? '<span class="badge badge-success">Pago</span>' : '<span class="badge badge-warning">Pendente</span>';
+      tr.innerHTML = `<td><span>${formatDate(item.date)}</span></td><td><div class="cell-group"><span>${escapeHtml(item.description)}</span></div></td><td><span class="badge">${escapeHtml(item.category || "-")}</span></td><td><span class="cell-subtle">${escapeHtml(item.payment || "-")}</span></td><td><strong>${formatBRL(item.amount)}</strong></td><td>${statusBadge}</td><td><div class="row-actions"><button class="icon-btn" data-edit="expense" data-id="${item.id}"><i class="ti ti-pencil"></i></button><button class="icon-btn danger" data-remove="expense" data-id="${item.id}"><i class="ti ti-trash"></i></button></div></td>`;
+      tr.querySelector("[data-edit]").addEventListener("click", () => openModal("expense", item));
+      tr.querySelector("[data-remove]").addEventListener("click", () => removeItem("expense", item.id));
+      return tr;
+    }
+
+    function renderBudgetRow(item) {
+      const tr = document.createElement("tr");
+      const spent = store.expenses.filter((e) => e.category && item.category && e.category.toLowerCase() === item.category.toLowerCase() && isSameMonth(e.date) && e.status !== "pendente").reduce((sum, e) => sum + Number(e.amount || 0), 0);
+      const limit = Number(item.limit || 0);
+      const remaining = limit - spent;
+      const pct = limit > 0 ? Math.min(100, Math.round((spent / limit) * 100)) : 0;
+      const barColor = pct >= 100 ? "rgba(239,68,68,.95)" : pct >= 80 ? "rgba(245,158,11,.95)" : "linear-gradient(90deg, rgba(56,189,248,.95), rgba(34,197,94,.95))";
+      tr.innerHTML = `<td><strong>${escapeHtml(item.category)}</strong><div class="cell-subtle">${escapeHtml(item.period || "")}</div></td><td>${formatBRL(limit)}</td><td>${formatBRL(spent)}</td><td style="color: ${remaining < 0 ? 'var(--danger)' : 'var(--success)'};">${formatBRL(remaining)}</td><td><div style="display:flex; flex-direction:column; gap:.5rem;"><div class="progress"><div class="progress-bar" style="width:${pct}%; background:${barColor};"></div></div><span class="cell-subtle">${pct}% utilizado</span></div></td><td><div class="row-actions"><button class="icon-btn" data-edit="budget" data-id="${item.id}"><i class="ti ti-pencil"></i></button><button class="icon-btn danger" data-remove="budget" data-id="${item.id}"><i class="ti ti-trash"></i></button></div></td>`;
+      tr.querySelector("[data-edit]").addEventListener("click", () => openModal("budget", item));
+      tr.querySelector("[data-remove]").addEventListener("click", () => removeItem("budget", item.id));
+      return tr;
+    }
+
+    function renderBillRow(item) {
+      const tr = document.createElement("tr");
+      const status = item.status === "pago" ? `<span class="badge badge-success">${item.kind === "receber" ? "Recebido" : "Pago"}</span>` : item.status === "atrasado" ? '<span class="badge badge-danger">Atrasado</span>' : '<span class="badge badge-warning">Pendente</span>';
+      const type = item.kind === "receber" ? '<span class="badge badge-info">A Receber</span>' : '<span class="badge">A Pagar</span>';
+      tr.innerHTML = `<td>${formatDate(item.dueDate)}</td><td><div class="cell-group"><span>${escapeHtml(item.description)}</span><span class="cell-subtle">${escapeHtml(item.note || "")}</span></div></td><td>${type}</td><td><span class="badge">${escapeHtml(item.category || "-")}</span></td><td><strong>${formatBRL(item.amount)}</strong></td><td>${status}</td><td><div class="row-actions"><button class="icon-btn" data-edit="bill" data-id="${item.id}"><i class="ti ti-pencil"></i></button><button class="icon-btn danger" data-remove="bill" data-id="${item.id}"><i class="ti ti-trash"></i></button></div></td>`;
+      tr.querySelector("[data-edit]").addEventListener("click", () => openModal("bill", item));
+      tr.querySelector("[data-remove]").addEventListener("click", () => removeItem("bill", item.id));
+      return tr;
+    }
+
+    function renderShoppingRow(item) {
+      const tr = document.createElement("tr");
+      const bought = !!item.bought;
+      const qty = Number(item.qty) || 0;
+      const unitPrice = Number(item.unitPrice) || 0;
+      const total = qty * unitPrice;
+      tr.innerHTML = `<td><button class="icon-btn success" data-toggle="${item.id}"><i class="ti ${bought ? 'ti-circle-check-filled' : 'ti-circle'}" style="color:${bought ? 'var(--success)' : 'var(--text-tertiary)'}"></i></button></td><td><div class="cell-group"><span style="text-decoration:${bought ? 'line-through' : 'none'}; color:${bought ? 'var(--text-tertiary)' : 'var(--text-primary)'};">${escapeHtml(item.item)}</span><span class="cell-subtle">${escapeHtml(item.note || "")}</span></div></td><td><span class="badge">${escapeHtml(item.aisle || "-")}</span></td><td>${qty || "-"}</td><td>${escapeHtml(item.unit || "-")}</td><td>${unitPrice ? formatBRL(unitPrice) : "-"}</td><td>${total > 0 ? formatBRL(total) : "-"}</td><td><div class="row-actions"><button class="icon-btn" data-edit="shopping" data-id="${item.id}"><i class="ti ti-pencil"></i></button><button class="icon-btn danger" data-remove="shopping" data-id="${item.id}"><i class="ti ti-trash"></i></button></div></td>`;
+      tr.querySelector("[data-toggle]").addEventListener("click", () => toggleShopping(item.id));
+      tr.querySelector("[data-edit]").addEventListener("click", () => openModal("shopping", item));
+      tr.querySelector("[data-remove]").addEventListener("click", () => removeItem("shopping", item.id));
+      return tr;
+    }
+
+    function renderTaskRow(item) {
+      const tr = document.createElement("tr");
+      const prio = item.priority === "alta" ? '<span class="badge badge-danger">Alta</span>' : item.priority === "media" ? '<span class="badge badge-warning">Média</span>' : '<span class="badge">Baixa</span>';
+      const st = item.status === "concluida" ? '<span class="badge badge-success">Concluída</span>' : item.status === "fazendo" ? '<span class="badge badge-info">Fazendo</span>' : '<span class="badge badge-warning">Pendente</span>';
+      tr.innerHTML = `<td><div class="cell-group"><span>${escapeHtml(item.title)}</span><span class="cell-subtle">${escapeHtml(item.details || "")}</span></div></td><td><span class="badge">${escapeHtml(item.room || "-")}</span></td><td>${prio}</td><td>${escapeHtml(item.assignee || "-")}</td><td>${item.dueDate ? formatDate(item.dueDate) : "-"}</td><td>${st}</td><td><div class="row-actions"><button class="icon-btn" data-edit="task" data-id="${item.id}"><i class="ti ti-pencil"></i></button><button class="icon-btn danger" data-remove="task" data-id="${item.id}"><i class="ti ti-trash"></i></button></div></td>`;
+      tr.querySelector("[data-edit]").addEventListener("click", () => openModal("task", item));
+      tr.querySelector("[data-remove]").addEventListener("click", () => removeItem("task", item.id));
+      return tr;
+    }
+
+    function renderStockRow(item) {
+      const tr = document.createElement("tr");
+      const qty = Number(item.qty) || 0;
+      const min = Number(item.minQty) || 0;
+      let sit = '<span class="badge badge-success">OK</span>';
+      if (min > 0 && qty <= min) sit = '<span class="badge badge-warning">Estoque Baixo</span>';
+      if (item.expiry) {
+        try {
+          const exp = new Date(item.expiry + "T00:00:00");
+          const now = new Date();
+          now.setHours(0, 0, 0, 0);
+          const diff = Math.ceil((exp - now) / (1000 * 60 * 60 * 24));
+          if (diff < 0) sit = '<span class="badge badge-danger">Vencido</span>';
+          else if (diff <= 7) sit = '<span class="badge badge-warning">Vence em ' + diff + (diff === 1 ? ' dia' : ' dias') + '</span>';
+        } catch {}
+      }
+      tr.innerHTML = `<td><strong>${escapeHtml(item.item)}</strong></td><td><span class="badge">${escapeHtml(item.category || "-")}</span></td><td>${qty}</td><td>${escapeHtml(item.unit || "-")}</td><td>${min || "-"}</td><td>${escapeHtml(item.location || "-")}</td><td>${item.expiry ? formatDate(item.expiry) : "-"}</td><td>${sit}</td><td><div class="row-actions"><button class="icon-btn" data-edit="stock" data-id="${item.id}"><i class="ti ti-pencil"></i></button><button class="icon-btn danger" data-remove="stock" data-id="${item.id}"><i class="ti ti-trash"></i></button></div></td>`;
+      tr.querySelector("[data-edit]").addEventListener("click", () => openModal("stock", item));
+      tr.querySelector("[data-remove]").addEventListener("click", () => removeItem("stock", item.id));
+      return tr;
+    }
+
+    function renderMaintenanceRow(item) {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${formatDate(item.date)}</td><td><div class="cell-group"><span>${escapeHtml(item.equipment)}</span><span class="cell-subtle">${escapeHtml(item.note || "")}</span></div></td><td><span class="badge">${item.kind === "preventiva" ? "Preventiva" : "Corretiva"}</span></td><td>${escapeHtml(item.service)}</td><td>${escapeHtml(item.provider || "-")}</td><td>${item.cost ? formatBRL(item.cost) : "-"}</td><td>${item.nextDate ? formatDate(item.nextDate) : "-"}</td><td><div class="row-actions"><button class="icon-btn" data-edit="maintenance" data-id="${item.id}"><i class="ti ti-pencil"></i></button><button class="icon-btn danger" data-remove="maintenance" data-id="${item.id}"><i class="ti ti-trash"></i></button></div></td>`;
+      tr.querySelector("[data-edit]").addEventListener("click", () => openModal("maintenance", item));
+      tr.querySelector("[data-remove]").addEventListener("click", () => removeItem("maintenance", item.id));
+      return tr;
+    }
+
+    function renderGoals() {
+      const list = document.querySelector("[data-list='goals']");
+      const empty = document.querySelector("[data-empty='goals']");
+      if (!list) return;
+      list.innerHTML = "";
+      if (!Array.isArray(store.goals) || store.goals.length === 0) { if (empty) empty.classList.remove("hidden"); return; }
+      if (empty) empty.classList.add("hidden");
+      store.goals.forEach((goal) => {
+        const target = Number(goal.target) || 0;
+        const saved = Number(goal.saved) || 0;
+        const pct = target > 0 ? Math.min(100, Math.round((saved / target) * 100)) : 0;
+        const item = document.createElement("div");
+        item.className = "list-item";
+        item.style.alignItems = "flex-start";
+        item.innerHTML = `<div style="display:flex; flex-direction:column; gap:1rem; flex:1; min-width:0;"><div style="display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; flex-wrap:wrap;"><div class="cell-group" style="gap:.4rem;"><strong style="font-size:1.05rem;">${escapeHtml(goal.title)}</strong><span class="cell-subtle">Alvo: ${formatBRL(target)} • Guardado: ${formatBRL(saved)} • ${pct}%</span>${goal.deadline ? '<span class="cell-subtle">Prazo: ' + formatDate(goal.deadline) + '</span>' : ""}${goal.note ? '<span class="cell-subtle">' + escapeHtml(goal.note) + '</span>' : ""}</div><div class="row-actions"><button class="icon-btn" data-goal-minus="${goal.id}"><i class="ti ti-minus"></i></button><button class="icon-btn" data-goal-plus="${goal.id}"><i class="ti ti-plus"></i></button><button class="icon-btn" data-edit="goal" data-id="${goal.id}"><i class="ti ti-pencil"></i></button><button class="icon-btn danger" data-remove="goal" data-id="${goal.id}"><i class="ti ti-trash"></i></button></div></div><div style="display:flex; flex-direction:column; gap:.5rem;"><div class="progress"><div class="progress-bar" style="width:${pct}%"></div></div></div></div>`;
+        item.querySelector("[data-goal-plus]").addEventListener("click", () => updateGoalSaved(goal.id, 100));
+        item.querySelector("[data-goal-minus]").addEventListener("click", () => updateGoalSaved(goal.id, -100));
+        item.querySelector("[data-edit]").addEventListener("click", () => openModal("goal", goal));
+        item.querySelector("[data-remove]").addEventListener("click", () => removeItem("goal", goal.id));
+        list.appendChild(item);
+      });
+    }
+
+    function renderOverview() {
+      const incomesPaid = store.incomes.reduce((s, i) => s + Number(i.amount || 0), 0);
+      const expensesPaid = store.expenses.filter((e) => e.status !== "pendente").reduce((s, e) => s + Number(e.amount || 0), 0);
+      const balance = incomesPaid - expensesPaid;
+      document.querySelector("[data-summary='balance']").textContent = formatBRL(balance);
+      document.querySelector("[data-summary='incomes-month']").textContent = formatBRL(store.incomes.filter((i) => isSameMonth(i.date)).reduce((s, i) => s + Number(i.amount || 0), 0));
+      document.querySelector("[data-summary='expenses-month']").textContent = formatBRL(store.expenses.filter((e) => isSameMonth(e.date)).reduce((s, e) => s + Number(e.amount || 0), 0));
+      document.querySelector("[data-summary='bills-pending']").textContent = formatBRL(store.bills.filter((b) => b.status !== "pago").reduce((s, b) => s + Number(b.amount || 0), 0));
+
+      const billsList = document.querySelector("[data-list='overview-bills']");
+      const billsEmpty = document.querySelector("[data-empty='overview-bills']");
+      if (billsList) {
+        billsList.innerHTML = "";
+        const bills = [...store.bills].filter((b) => b.status !== "pago").sort((a, b) => String(a.dueDate || "9999-12-31").localeCompare(String(b.dueDate || "9999-12-31"))).slice(0, 5);
+        if (!bills.length) billsEmpty.classList.remove("hidden");
+        else {
+          billsEmpty.classList.add("hidden");
+          bills.forEach((b) => {
+            const el = document.createElement("div");
+            el.className = "list-item";
+            el.innerHTML = `<div class="list-group"><div class="dot ${b.status === 'atrasado' ? 'dot-danger' : 'dot-warning'}"></div><div class="cell-group"><span>${escapeHtml(b.description)}</span><span class="cell-subtle">Vence ${formatDate(b.dueDate)} • ${b.kind === "receber" ? "A Receber" : "A Pagar"}</span></div></div><strong>${formatBRL(b.amount)}</strong>`;
+            billsList.appendChild(el);
+          });
+        }
+      }
+
+      const shopList = document.querySelector("[data-list='overview-shopping']");
+      const shopEmpty = document.querySelector("[data-empty='overview-shopping']");
+      if (shopList) {
+        shopList.innerHTML = "";
+        const shop = store.shopping.filter((s) => !s.bought).slice(0, 6);
+        if (!shop.length) shopEmpty.classList.remove("hidden");
+        else {
+          shopEmpty.classList.add("hidden");
+          shop.forEach((s) => {
+            const el = document.createElement("div");
+            el.className = "list-item";
+            el.innerHTML = `<div class="list-group"><div class="dot dot-info"></div><div class="cell-group"><span>${escapeHtml(s.item)}</span><span class="cell-subtle">${s.qty || ""} ${s.unit || ""}${s.aisle ? " • " + escapeHtml(s.aisle) : ""}</span></div></div><button class="icon-btn success" data-over-shop="${s.id}"><i class="ti ti-check"></i></button>`;
+            el.querySelector("[data-over-shop]").addEventListener("click", () => toggleShopping(s.id));
+            shopList.appendChild(el);
+          });
+        }
+      }
+
+      const tBody = document.querySelector("[data-tbody='overview-tasks']");
+      const tEmpty = document.querySelector("[data-empty='overview-tasks']");
+      if (tBody) {
+        tBody.innerHTML = "";
+        const tasks = store.tasks.filter((t) => t.status !== "concluida").sort((a, b) => String(a.dueDate || "9999-12-31").localeCompare(String(b.dueDate || "9999-12-31"))).slice(0, 6);
+        if (!tasks.length) { if (tEmpty) tEmpty.classList.remove("hidden"); }
+        else {
+          if (tEmpty) tEmpty.classList.add("hidden");
+          tasks.forEach((t) => {
+            const tr = document.createElement("tr");
+            const prio = t.priority === "alta" ? '<span class="badge badge-danger">Alta</span>' : t.priority === "media" ? '<span class="badge badge-warning">Média</span>' : '<span class="badge">Baixa</span>';
+            tr.innerHTML = `<td><span>${escapeHtml(t.title)}</span></td><td><span class="badge">${escapeHtml(t.room || "-")}</span></td><td>${prio}</td><td>${escapeHtml(t.assignee || "-")}</td><td>${t.dueDate ? formatDate(t.dueDate) : "-"}</td><td><span class="badge badge-warning">Pendente</span></td>`;
+            tBody.appendChild(tr);
+          });
+        }
+      }
+    }
+
+    function exportJson() {
+      const blob = new Blob([JSON.stringify(store, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      const date = new Date().toISOString().slice(0, 10);
+      a.href = url;
+      a.download = `LarMax-backup-${date}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    function importJson(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        try {
+          const data = JSON.parse(evt.target.result);
+          if (!confirm("Isso irá SUBSTITUIR todos os dados atuais com este backup. Deseja continuar?")) { e.target.value = ""; return; }
+          Object.keys(store).forEach((k) => delete store[k]);
+          Object.assign(store, { incomes: [], expenses: [], budget: [], bills: [], shopping: [], tasks: [], stock: [], maintenance: [], goals: [], ...data });
+          saveStore();
+          alert("Backup restaurado com sucesso!");
+          switchView("overview");
+        } catch (err) {
+          alert("Arquivo inválido. Utilize apenas um backup gerado pelo LarMax.");
+        }
+        e.target.value = "";
+      };
+      reader.readAsText(file);
+    }
+
+    function escapeHtml(str = "") {
+      return String(str).replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[m]));
+    }
+
+    renderAll();
+  </script>
+</body>
+
+</html>
